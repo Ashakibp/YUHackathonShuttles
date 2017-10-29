@@ -3,7 +3,7 @@
  * https://github.com/facebook/react-native
  * @flow
  */
-
+'use strict';
 import React, { Component } from 'react';
 import {
   Platform,
@@ -19,7 +19,23 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-export default class App extends Component<{}> {
+export default class Login extends Component<{}> {
+    constructor(props){
+        super(props);
+        this.state = {
+            email: null,
+            password: null
+        }
+    }
+    login(email, password){
+        if(email == null|| password == null){
+            alert("Username and password must be full")
+        }
+        else{
+
+        }
+    }
+
   render() {
     return (
       <View style={styles.container}>
@@ -35,14 +51,14 @@ export default class App extends Component<{}> {
                    placeholder = "Email"
                    placeholderTextColor = "#000000"
                    autoCapitalize = "none"
-                   onChangeText = {this.handleEmail}/>
+                   onChangeText = {(email) => this.setState({email})}/>
 
         <TextInput style = {styles.input}
                    underlineColorAndroid = "transparent"
                    placeholder = "Password"
                    placeholderTextColor = "#000000"
                    autoCapitalize = "none"
-                   onChangeText = {this.handlePassword}/>
+                   onChangeText = {(password) => this.setState({password})}/>
 
         <TouchableOpacity
             style = {styles.submitButton}
@@ -53,6 +69,7 @@ export default class App extends Component<{}> {
     );
   }
 }
+
 
 
 const styles = StyleSheet.create({
@@ -79,7 +96,7 @@ const styles = StyleSheet.create({
         width: 300
     },
     submitButton: {
-        backgroundColor: '#465edc',
+        backgroundColor: '#1433dc',
         padding: 10,
         margin: 15,
         height: 40,
