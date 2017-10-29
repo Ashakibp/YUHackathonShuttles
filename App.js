@@ -3,21 +3,16 @@
  * https://github.com/facebook/react-native
  * @flow
  */
+
 'use strict';
 import React, { Component } from 'react';
 import {
   Platform,
   StyleSheet,
   Text,
-  View, Image, TouchableOpacity, TextInput
+  View, Image, TouchableOpacity, TextInput, Navigator
 } from 'react-native';
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import profile from "./profile";
 
 export default class Login extends Component<{}> {
     constructor(props){
@@ -31,10 +26,11 @@ export default class Login extends Component<{}> {
         if(email == null|| password == null){
             alert("Username and password must be full")
         }
-        else{
-
+        else if(email == "Aaron" && password == "Shakib"){
+            return navigator(profile);
         }
     }
+
 
   render() {
     return (
@@ -69,7 +65,6 @@ export default class Login extends Component<{}> {
     );
   }
 }
-
 
 
 const styles = StyleSheet.create({
