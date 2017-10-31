@@ -26,13 +26,27 @@ export default class Login extends Component<{}> {
             password: null
         }
     }
-    login(email, password) {
+    async login(email, password) {
         if (email == null || password == null) {
             alert("Username and password must be full")
         }
         else {
             try {
-                let response = fetch("rrrr");
+                let response = await fetch("http://127.0.0.1:8080/login/" + this.state.email + "/" + this.state.password, {
+                    method: 'get',
+                        headers: {
+                    'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                }
+                }).then((response) => response.json())
+                    .then((responseData) => {
+                    if(responseData['login'] == true){
+                        alert("Login Successful")
+                    }
+                    else{
+                        alert("Invalid Login")
+                    }
+                    }).done();
             }
             catch (error) {
                 alert("Something went wrong - Please check your login")
@@ -55,7 +69,7 @@ export default class Login extends Component<{}> {
                 </Text>
                 <TextInput style = {styles.input}
                            underlineColorAndroid = "transparent"
-                           placeholder = "Email"
+                           placeholder = "Email or Username"
                            placeholderTextColor = "#000000"
                            autoCapitalize = "none"
                            onChangeText = {(email) => this.setState({email})}/>
@@ -67,7 +81,6 @@ export default class Login extends Component<{}> {
                            autoCapitalize = "none"
                            secureTextEntry={true}
                            onChangeText = {(password) => this.setState({password})}/>
-
                 <TouchableOpacity
                     style = {styles.submitButton}
                     onPress = {() => this.login(this.state.email, this.state.password)}>

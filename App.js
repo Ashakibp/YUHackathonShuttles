@@ -19,10 +19,11 @@ import {
 } from 'react-native';
 
 import Login from './Components/Login/Login'
+import ChooseDirection from './Components/Shuttle/ChooseDirection'
 export default class Home extends Component{
     render() {
         return (
-            <Login />
+            <ChooseDirection/>
         );
     }
 }
