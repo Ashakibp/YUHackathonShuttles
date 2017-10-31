@@ -26,19 +26,24 @@ export default class Login extends Component<{}> {
             password: null
         }
     }
-    login(email, password){
-        if(email == null|| password == null){
+    login(email, password) {
+        if (email == null || password == null) {
             alert("Username and password must be full")
         }
-        else if(email == "Aaron" && password == "Shakib"){
-            query(
+        else {
+            try {
+                let response = fetch("rrrr");
+            }
+            catch (error) {
+                alert("Something went wrong - Please check your login")
+                return (<Login/>);
 
-            )
+            }
         }
     }
 
 
-    render() {
+    render(){
         return (
             <View style={styles.container}>
                 <Image style={styles.imageStyle } source={require('./Resources/YuLogo.png')} />
@@ -60,6 +65,7 @@ export default class Login extends Component<{}> {
                            placeholder = "Password"
                            placeholderTextColor = "#000000"
                            autoCapitalize = "none"
+                           secureTextEntry={true}
                            onChangeText = {(password) => this.setState({password})}/>
 
                 <TouchableOpacity
