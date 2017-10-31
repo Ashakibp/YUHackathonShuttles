@@ -6,64 +6,25 @@
 
 'use strict';
 import React, { Component } from 'react';
+
 import {
   Platform,
   StyleSheet,
   Text,
-  View, Image, TouchableOpacity, TextInput, Navigator
+  View,
+  Image,
+  TouchableOpacity,
+  TextInput,
+  Navigator
 } from 'react-native';
-import profile from "./profile";
 
-export default class Login extends Component<{}> {
-    constructor(props){
-        super(props);
-        this.state = {
-            email: null,
-            password: null
-        }
+import Login from './Components/Login/Login'
+export default class Home extends Component{
+    render() {
+        return (
+            <Login />
+        );
     }
-    login(email, password){
-        if(email == null|| password == null){
-            alert("Username and password must be full")
-        }
-        else if(email == "Aaron" && password == "Shakib"){
-            return navigator(profile);
-        }
-    }
-
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Image style={styles.imageStyle } source={require('./Resources/YuLogo.png')} />
-        <Text style={styles.welcome}>
-          Welcome
-        </Text>
-        <Text style={styles.instructions}>
-          Please Login
-        </Text>
-        <TextInput style = {styles.input}
-                   underlineColorAndroid = "transparent"
-                   placeholder = "Email"
-                   placeholderTextColor = "#000000"
-                   autoCapitalize = "none"
-                   onChangeText = {(email) => this.setState({email})}/>
-
-        <TextInput style = {styles.input}
-                   underlineColorAndroid = "transparent"
-                   placeholder = "Password"
-                   placeholderTextColor = "#000000"
-                   autoCapitalize = "none"
-                   onChangeText = {(password) => this.setState({password})}/>
-
-        <TouchableOpacity
-            style = {styles.submitButton}
-            onPress = {() => this.login(this.state.email, this.state.password)}>
-          <Text style = {styles.submitButtonText}> Submit </Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
 }
 
 
