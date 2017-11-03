@@ -23,7 +23,7 @@ import ChooseDirection from './Components/Shuttle/ChooseDirection'
 export default class Home extends Component{
     render() {
         return (
-            <ChooseDirection/>
+            <Login/>
         );
     }
 }

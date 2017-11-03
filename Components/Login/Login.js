@@ -60,9 +60,9 @@ export default class Login extends Component<{}> {
     render(){
         return (
             <View style={styles.container}>
-                <Image style={styles.imageStyle } source={require('./Resources/YuLogo.png')} />
+                <Image style={styles.imageStyle } source={require('./Resources/yuLogo.png')} />
                 <Text style={styles.welcome}>
-                    Welcome
+                    YU Shuttles
                 </Text>
                 <Text style={styles.instructions}>
                     Please Login
@@ -102,25 +102,32 @@ const styles = StyleSheet.create({
         height: 130
     },
     welcome: {
-        fontSize: 30,
+        fontSize: 40,
         textAlign: 'center',
         margin: 10,
     },
     input: {
-        margin: 15,
-        height: 40,
+        paddingLeft: 10,
+        padding: 5,
+        margin: 10,
+        height: 50,
         borderColor: '#000000',
+        borderRadius: 5,
         borderWidth: 1,
-        width: 300
+        width: 300,
     },
     submitButton: {
         backgroundColor: '#1433dc',
         padding: 10,
+        borderRadius: 5,
         margin: 15,
-        height: 40,
+        height: 50,
+        width: 150,
     },
     submitButtonText:{
-        color: 'white'
+        fontSize: 20,
+        color: 'white',
+        textAlign: 'center',
     },
     instructions: {
         fontSize: 20,
