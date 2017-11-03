@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-
+import Spinner from 'react-native-loading-spinner-overlay';
 import {
     Platform,
     StyleSheet,
@@ -22,12 +22,21 @@ export default class Login extends Component<{}> {
         super(props);
         this.state = {
             email: null,
-            password: null
+            password: null,
+            visible: false
         }
     }
 
     static navigationOptions = {
         title: 'LoginScreen',
+    };
+
+    componentDidMount() {
+        setInterval(() => {
+            this.setState({
+                visible: !this.state.visible
+            });
+        }, 3000);
     }
 
     async login(email, password) {
@@ -38,18 +47,22 @@ export default class Login extends Component<{}> {
             try {
                 let response = await fetch("http://127.0.0.1:8080/login/" + this.state.email + "/" + this.state.password, {
                     method: 'get',
-                        headers: {
+                    headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
-                }
+                    }
                 }).then((response) => response.json())
                     .then((responseData) => {
-                    if(responseData['login'] == true){
-                        this.props.navigation.navigate('ChooseDirectionScreen', { email: this.state.email, password: this.state.password });
-                    }
-                    else{
-                        alert("Invalid Login");
-                    }
+                        if (responseData['login'] == true) {
+
+                            this.props.navigation.navigate('ChooseDirectionScreen', {
+                                email: this.state.email,
+                                password: this.state.password
+                            });
+                        }
+                        else {
+                            alert("Invalid Login")
+                        }
                     }).done();
             }
             catch (error) {
@@ -87,7 +100,7 @@ export default class Login extends Component<{}> {
                            onChangeText = {(password) => this.setState({password})}/>
                 <TouchableOpacity
                     style = {styles.submitButton}
-                    onPress = {() => this.login(this.state.email, this.state.password)}>
+                    onPress = {() => this.login(this.state.email, this.state.password)} >
                     <Text style = {styles.submitButtonText}> Submit </Text>
                 </TouchableOpacity>
             </View>

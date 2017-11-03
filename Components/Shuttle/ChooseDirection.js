@@ -23,7 +23,7 @@ export default class ChooseDirection extends Component<{}> {
     }
     static navigationOptions = {
         title: 'ChooseDirectionScreen',
-    }
+    };
 
     chooseDirection(direction){
         this.state.direction = direction;
@@ -37,12 +37,12 @@ export default class ChooseDirection extends Component<{}> {
                 </Text>
                 <TouchableOpacity
                     style = {styles.directionButton}
-                    onPress =  {this.chooseDirection("Wilf")}>
+                    onPress =  {() => this.chooseDirection("Wilf")}>
                     <Text style = {styles.directionButtonText}> Wilf </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style = {styles.directionButton}
-                    onPress =  {this.chooseDirection("Beren")}>
+                    onPress =  {() => this.chooseDirection("Beren")}>
                     <Text style = {styles.directionButtonText}> Beren </Text>
                 </TouchableOpacity>
             </View>
