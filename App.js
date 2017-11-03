@@ -18,15 +18,19 @@ import {
   Navigator
 } from 'react-native';
 
+import { StackNavigator } from 'react-navigation'
 import Login from './Components/Login/Login'
 import ChooseDirection from './Components/Shuttle/ChooseDirection'
-export default class Home extends Component{
-    render() {
-        return (
-            <Login/>
-        );
-    }
-}
+
+const Navigation = StackNavigator({
+    LoginScreen: {
+        screen: Login,
+    },
+    ChooseDirectionScreen: {
+        screen: ChooseDirection,
+    },
+});
+export default Navigation
 
 
 const styles = StyleSheet.create({

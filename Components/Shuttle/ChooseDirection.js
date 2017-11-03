@@ -16,10 +16,13 @@ export default class ChooseDirection extends Component<{}> {
     constructor(props){
         super(props);
         this.state = {
-            email: null,
-            password: null,
+            email: this.props.navigation.state.params.email,
+            password: this.props.navigation.state.params.password,
             direction: null
         }
+    }
+    static navigationOptions = {
+        title: 'ChooseDirectionScreen',
     }
 
     chooseDirection(direction){

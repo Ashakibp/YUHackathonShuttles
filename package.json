@@ -1,5 +1,5 @@
 {
-	"name": "YUHackathon",
+	"name": "YUShuttles",
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
@@ -7,9 +7,10 @@
 		"test": "jest"
 	},
 	"dependencies": {
+		"native-base": "^2.3.3",
 		"react": "16.0.0-beta.5",
 		"react-native": "0.49.5",
-		"react-navigation": "^1.0.0-beta.15"
+		"react-navigation": "^1.0.0-beta.17"
 	},
 	"devDependencies": {
 		"babel-jest": "21.2.0",

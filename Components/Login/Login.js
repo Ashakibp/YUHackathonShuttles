@@ -14,9 +14,8 @@ import {
     Image,
     TouchableOpacity,
     TextInput,
-    Navigator
+    Navigator,
 } from 'react-native';
-
 
 export default class Login extends Component<{}> {
     constructor(props){
@@ -26,30 +25,35 @@ export default class Login extends Component<{}> {
             password: null
         }
     }
+
+    static navigationOptions = {
+        title: 'LoginScreen',
+    }
+
     async login(email, password) {
         if (email == null || password == null) {
-            alert("Username and password must be full")
+            alert("Username and password must be full");
         }
         else {
             try {
                 let response = await fetch("http://127.0.0.1:8080/login/" + this.state.email + "/" + this.state.password, {
                     method: 'get',
                         headers: {
-                    'Accept': 'application/json',
+                        'Accept': 'application/json',
                         'Content-Type': 'application/json'
                 }
                 }).then((response) => response.json())
                     .then((responseData) => {
                     if(responseData['login'] == true){
-                        alert("Login Successful")
+                        this.props.navigation.navigate('ChooseDirectionScreen', { email: this.state.email, password: this.state.password });
                     }
                     else{
-                        alert("Invalid Login")
+                        alert("Invalid Login");
                     }
                     }).done();
             }
             catch (error) {
-                alert("Something went wrong - Please check your login")
+                alert("Something went wrong - Please check your login");
                 return (<Login/>);
 
             }
@@ -90,6 +94,7 @@ export default class Login extends Component<{}> {
         );
     }
 }
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
