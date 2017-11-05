@@ -21,14 +21,18 @@ import {
 import { StackNavigator } from 'react-navigation'
 import Login from './Components/Login/Login'
 import ChooseDirection from './Components/Shuttle/ChooseDirection'
+import PickSide from './Components/Profile/PickSide'
 
 const Navigation = StackNavigator({
-    LoginScreen: {
+    Login: {
         screen: Login,
     },
-    ChooseDirectionScreen: {
+    'Choose Direction': {
         screen: ChooseDirection,
     },
+    Profile:{
+        screen: PickSide,
+    }
 });
 export default Navigation
 

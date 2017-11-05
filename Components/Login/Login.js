@@ -28,7 +28,7 @@ export default class Login extends Component<{}> {
     }
 
     static navigationOptions = {
-        title: 'LoginScreen',
+        title: 'Login',
     };
 
     componentDidMount() {
@@ -55,7 +55,7 @@ export default class Login extends Component<{}> {
                     .then((responseData) => {
                         if (responseData['login'] == true) {
 
-                            this.props.navigation.navigate('ChooseDirectionScreen', {
+                            this.props.navigation.navigate('Profile', {
                                 email: this.state.email,
                                 password: this.state.password
                             });
