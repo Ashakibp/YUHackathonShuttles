@@ -27,7 +27,6 @@ export default class ChooseDirection extends Component<{}> {
 
     async chooseDirection(direction){
         this.state.direction = direction;
-        alert(this.state.direction);
             try {
                 let response = await fetch("http://127.0.0.1:8080/gettimes/" + this.state.email + "/" + this.state.password + "/" + this.state.direction, {
                     method: 'get',
@@ -37,7 +36,7 @@ export default class ChooseDirection extends Component<{}> {
                     }
                 }).then((response) => response.json())
                     .then((responseData) => {
-                            this.props.navigation.navigate('ChooseDirectionScreen', {
+                            this.props.navigation.navigate('Pick A Time', {
                                 email: this.state.email,
                                 password: this.state.password,
                                 direction: this.state.direction,

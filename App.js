@@ -22,6 +22,7 @@ import { StackNavigator } from 'react-navigation'
 import Login from './Components/Login/Login'
 import ChooseDirection from './Components/Shuttle/ChooseDirection'
 import PickSide from './Components/Profile/PickSide'
+import PickATime from './Components/Shuttle/PickATime'
 
 const Navigation = StackNavigator({
     Login: {
@@ -32,6 +33,9 @@ const Navigation = StackNavigator({
     },
     Profile:{
         screen: PickSide,
+    },
+    'Pick A Time': {
+        screen: PickATime,
     }
 });
 export default Navigation

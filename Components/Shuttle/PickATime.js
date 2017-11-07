@@ -6,6 +6,8 @@ import {
     Text,
     View,
     Image,
+    Button,
+    Alert,
     ScrollView,
     TouchableOpacity,
     TextInput,
@@ -19,46 +21,43 @@ export default class ChooseDirection extends Component<{}> {
         this.state = {
             email: this.props.navigation.state.params.email,
             password: this.props.navigation.state.params.password,
-            direction: this.props.navigation.state.params.times
+            direction: this.props.navigation.state.params.direction,
+            times: this.props.navigation.state.params.times
         }
-    }
+}
     static navigationOptions = {
         title: 'Pick A Time',
     };
+async bookTime(time){
+    Alert.alert(
+        'Would you like to book this Shuttle?',
+        time,
+        [
+            {text: 'Cancel'},
+            {text: 'Book it!', onPress: () => console.log('Ask me later pressed')},
+        ],
+        { cancelable: false }
+    )
 
-    async chooseDirection(direction){
-        this.state.direction = direction;
-        alert(this.state.direction);
-        try {
-            let response = await fetch("http://127.0.0.1:8080/gettimes/" + this.state.email + "/" + this.state.password + "/" + this.state.direction, {
-                method: 'get',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            }).then((response) => response.json())
-                .then((responseData) => {
-                        this.props.navigation.navigate('ChooseDirectionScreen', {
-                            email: this.state.email,
-                            password: this.state.password,
-                            direction: this.state.direction,
-                            times: responseData["times"]
-                        });
-                    }
-                ).done();
+
+}
+
+render(){
+        let buttonList = this.state.times;
+        buttonsListArr = [];
+        console.log(buttonList);
+
+        for (let i = 0; i < buttonList.length; i++)
+        {
+        buttonsListArr.push(
+            <TouchableOpacity style={styles.directionButton} onPress =  {() => this.bookTime(buttonList[i])}><Text style = {styles.directionButtonText}>{buttonList[i]}</Text></TouchableOpacity>
+        );
         }
-        catch (error) {
-            alert("Something went wrong");
-            return (<Login/>);
-
-        }
-    }
-
-    render(){
         return (
             <View style={styles.container}>
-                <ScrollView/>
-
+            <ScrollView>
+                {buttonsListArr}
+            </ScrollView>
             </View>
         );
     }
@@ -66,13 +65,13 @@ export default class ChooseDirection extends Component<{}> {
 const styles = StyleSheet.create({
         directionButton: {
             backgroundColor: '#1433dc',
-            padding: 10,
-            width: 250,
-            margin: 30,
+            padding: 30,
+            width: 300,
+            margin: 15,
             justifyContent: 'center',
             borderRadius: 15,
             alignItems: 'center',
-            height: 75,
+            height: 25,
         },
         container: {
             flex: 1,
@@ -99,7 +98,7 @@ const styles = StyleSheet.create({
         },
         directionButtonText:{
             color: 'white',
-            fontSize: 30,
+            fontSize: 18,
             textAlign: 'center',
             justifyContent: 'center',
         },
