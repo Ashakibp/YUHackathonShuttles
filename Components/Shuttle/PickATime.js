@@ -34,13 +34,15 @@ async bookTime(time){
         time,
         [
             {text: 'Cancel'},
-            {text: 'Book it!', onPress: () => console.log('Ask me later pressed')},
+            {text: 'Book it!', onPress: () => this.setTime(time)},
         ],
         { cancelable: false }
     )
-
-
 }
+    async setTime(time){
+        alert("IS BOOKED")
+        this.props.navigation.goBack('Profile');
+    }
 
 render(){
         let buttonList = this.state.times;
