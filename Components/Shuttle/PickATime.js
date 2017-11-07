@@ -41,7 +41,10 @@ async bookTime(time){
 }
     async setTime(time){
         alert("IS BOOKED")
-        this.props.navigation.goBack('Profile');
+        this.props.navigation.navigate('Profile', {
+            email: this.state.email,
+            password: this.state.password
+        });
     }
 
 render(){
