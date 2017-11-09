@@ -1,22 +1,17 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 import {
-    Platform,
     StyleSheet,
     Text,
     View,
-    Image,
-    Button,
     Alert,
     ScrollView,
     TouchableOpacity,
-    TextInput,
-    Navigator
 } from 'react-native';
 
 
 export default class ChooseDirection extends Component<{}> {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             email: this.props.navigation.state.params.email,
@@ -24,22 +19,25 @@ export default class ChooseDirection extends Component<{}> {
             direction: this.props.navigation.state.params.direction,
             times: this.props.navigation.state.params.times
         }
-}
+    }
+
     static navigationOptions = {
         title: 'Pick A Time',
     };
-async bookTime(time){
-    Alert.alert(
-        'Would you like to book this Shuttle?',
-        time,
-        [
-            {text: 'Cancel'},
-            {text: 'Book it!', onPress: () => this.setTime(time)},
-        ],
-        { cancelable: false }
-    )
-}
-    async setTime(time){
+
+    async bookTime(time) {
+        Alert.alert(
+            'Would you like to book this Shuttle?',
+            time,
+            [
+                {text: 'Cancel'},
+                {text: 'Book it!', onPress: () => this.setTime(time)},
+            ],
+            {cancelable: false}
+        )
+    }
+
+    async setTime(time) {
         alert("IS BOOKED")
         this.props.navigation.navigate('Profile', {
             email: this.state.email,
@@ -47,22 +45,22 @@ async bookTime(time){
         });
     }
 
-render(){
+    render() {
         let buttonList = this.state.times;
         buttonsListArr = [];
         console.log(buttonList);
 
-        for (let i = 0; i < buttonList.length; i++)
-        {
-        buttonsListArr.push(
-            <TouchableOpacity style={styles.directionButton} onPress =  {() => this.bookTime(buttonList[i])}><Text style = {styles.directionButtonText}>{buttonList[i]}</Text></TouchableOpacity>
-        );
+        for (let i = 0; i < buttonList.length; i++) {
+            buttonsListArr.push(
+                <TouchableOpacity style={styles.directionButton} onPress={() => this.bookTime(buttonList[i])}><Text
+                    style={styles.directionButtonText}>{buttonList[i]}</Text></TouchableOpacity>
+            );
         }
         return (
             <View style={styles.container}>
-            <ScrollView>
-                {buttonsListArr}
-            </ScrollView>
+                <ScrollView>
+                    {buttonsListArr}
+                </ScrollView>
             </View>
         );
     }
@@ -92,7 +90,7 @@ const styles = StyleSheet.create({
             fontSize: 60,
             textAlign: 'center',
             margin: 10,
-            marginBottom:60
+            marginBottom: 60
         },
         input: {
             margin: 15,
@@ -101,7 +99,7 @@ const styles = StyleSheet.create({
             borderWidth: 1,
             width: 300
         },
-        directionButtonText:{
+        directionButtonText: {
             color: 'white',
             fontSize: 18,
             textAlign: 'center',
