@@ -13,8 +13,7 @@ import {
     TextInput,
     Navigator
 } from 'react-native';
-
-
+import Login from '../../Components/Login/Login'
 export default class ChooseDirection extends Component<{}> {
     constructor(props){
         super(props);
@@ -29,22 +28,43 @@ export default class ChooseDirection extends Component<{}> {
         title: 'Pick A Time',
     };
 async bookTime(time){
+    posi = time.indexOf("(") - 1;
+    timeStr = time.substring(0, posi);
     Alert.alert(
         'Would you like to book this Shuttle?',
-        time,
+        timeStr,
         [
             {text: 'Cancel'},
-            {text: 'Book it!', onPress: () => this.setTime(time)},
+            {text: 'Book it!', onPress: () => this.setTime(timeStr)},
         ],
         { cancelable: false }
     )
 }
     async setTime(time){
-        alert("IS BOOKED")
-        this.props.navigation.navigate('Profile', {
-            email: this.state.email,
-            password: this.state.password
-        });
+        try {
+            let response = await fetch("http://127.0.0.1:8080/bookride/" + this.state.email + "/" + this.state.password + "/" + this.state.direction + "/" + time, {
+                method: 'get',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            }).then((response) => response.json())
+                .then((responseData) => {
+                console.log(responseData);
+                    if (responseData['worked'] == true) {
+                        alert("Shuttle is Booked!");
+                        this.props.navigation.navigate('Profile', {
+                            email: this.state.email,
+                            password: this.state.password
+                        });
+                    }
+                }).done();
+        }
+        catch (error) {
+            alert("Something went wrong :(");
+            return (<Login/>);
+
+        }
     }
 
 render(){
