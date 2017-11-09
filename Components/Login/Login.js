@@ -31,7 +31,7 @@ export default class Login extends Component<{}> {
     }
 
     async login(email, password) {
-        if (email == null || password == null) {
+        if (email === null || password === null) {
             alert("Username and password must be full");
         }
         else {
@@ -44,7 +44,7 @@ export default class Login extends Component<{}> {
                     }
                 }).then((response) => response.json())
                     .then((responseData) => {
-                        if (responseData['login'] == true) {
+                        if (responseData['login'] === true) {
 
                             this.props.navigation.navigate('Profile', {
                                 email: this.state.email,
