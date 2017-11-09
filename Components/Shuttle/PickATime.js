@@ -1,21 +1,17 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 import {
-    Platform,
     StyleSheet,
     Text,
     View,
-    Image,
-    Button,
     Alert,
     ScrollView,
     TouchableOpacity,
-    TextInput,
-    Navigator
 } from 'react-native';
 import Login from '../../Components/Login/Login'
+
 export default class ChooseDirection extends Component<{}> {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             email: this.props.navigation.state.params.email,
@@ -23,24 +19,27 @@ export default class ChooseDirection extends Component<{}> {
             direction: this.props.navigation.state.params.direction,
             times: this.props.navigation.state.params.times
         }
-}
+    }
+
     static navigationOptions = {
         title: 'Pick A Time',
     };
-async bookTime(time){
-    posi = time.indexOf("(") - 1;
-    timeStr = time.substring(0, posi);
-    Alert.alert(
-        'Would you like to book this Shuttle?',
-        timeStr,
-        [
-            {text: 'Cancel'},
-            {text: 'Book it!', onPress: () => this.setTime(timeStr)},
-        ],
-        { cancelable: false }
-    )
-}
-    async setTime(time){
+
+    async bookTime(time) {
+        posi = time.indexOf("(") - 1;
+        timeStr = time.substring(0, posi);
+        Alert.alert(
+            'Would you like to book this Shuttle?',
+            timeStr,
+            [
+                {text: 'Cancel'},
+                {text: 'Book it!', onPress: () => this.setTime(timeStr)},
+            ],
+            {cancelable: false}
+        )
+    }
+
+    async setTime(time) {
         try {
             let response = await fetch("http://127.0.0.1:8080/bookride/" + this.state.email + "/" + this.state.password + "/" + this.state.direction + "/" + time, {
                 method: 'get',
@@ -66,36 +65,36 @@ async bookTime(time){
         }
     }
 
-render(){
+    render() {
         let buttonList = this.state.times;
         buttonsListArr = [];
         console.log(buttonList);
 
-        for (let i = 0; i < buttonList.length; i++)
-        {
-        buttonsListArr.push(
-            <TouchableOpacity style={styles.directionButton} onPress =  {() => this.bookTime(buttonList[i])}><Text style = {styles.directionButtonText}>{buttonList[i]}</Text></TouchableOpacity>
-        );
+        for (let i = 0; i < buttonList.length; i++) {
+            buttonsListArr.push(
+                <TouchableOpacity style={styles.directionButton} onPress={() => this.bookTime(buttonList[i])}><Text
+                    style={styles.directionButtonText}>{buttonList[i]}</Text></TouchableOpacity>
+            );
         }
         return (
             <View style={styles.container}>
-            <ScrollView>
-                {buttonsListArr}
-            </ScrollView>
+                <ScrollView>
+                    {buttonsListArr}
+                </ScrollView>
             </View>
         );
     }
 }
 const styles = StyleSheet.create({
         directionButton: {
-            backgroundColor: '#1433dc',
-            padding: 30,
+            backgroundColor: '#015697',
+            padding: 10,
             width: 300,
-            margin: 15,
+            margin: 5,
             justifyContent: 'center',
-            borderRadius: 15,
+            borderRadius: 10,
             alignItems: 'center',
-            height: 25,
+            height: 75,
         },
         container: {
             flex: 1,
@@ -107,12 +106,6 @@ const styles = StyleSheet.create({
             width: 130,
             height: 130
         },
-        welcome: {
-            fontSize: 60,
-            textAlign: 'center',
-            margin: 10,
-            marginBottom:60
-        },
         input: {
             margin: 15,
             height: 40,
@@ -120,17 +113,11 @@ const styles = StyleSheet.create({
             borderWidth: 1,
             width: 300
         },
-        directionButtonText:{
+        directionButtonText: {
             color: 'white',
-            fontSize: 18,
+            fontSize: 20,
             textAlign: 'center',
             justifyContent: 'center',
-        },
-        instructions: {
-            fontSize: 50,
-            textAlign: 'center',
-            margin: 30,
-            marginBottom: 80
         },
 
     }
