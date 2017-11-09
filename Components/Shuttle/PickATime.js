@@ -50,7 +50,6 @@ async bookTime(time){
                 }
             }).then((response) => response.json())
                 .then((responseData) => {
-                console.log(responseData);
                     if (responseData['worked'] == true) {
                         alert("Shuttle is Booked!");
                         this.props.navigation.navigate('Profile', {
