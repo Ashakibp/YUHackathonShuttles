@@ -25,7 +25,7 @@ export default class ChooseDirection extends Component<{}> {
     async chooseDirection(direction) {
         this.state.direction = direction;
         try {
-            let response = await fetch("http://127.0.0.1:8080/gettimes/" + this.state.email + "/" + this.state.password + "/" + this.state.direction, {
+            let response = await fetch("http://18.221.232.220:8080/gettimes/" + this.state.email + "/" + this.state.password + "/" + this.state.direction, {
                 method: 'get',
                 headers: {
                     'Accept': 'application/json',

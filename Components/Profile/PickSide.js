@@ -47,7 +47,7 @@ export default class PickSide extends Component<{}> {
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.directionButton}
-                    onPress={() => alert("My Rides")}>
+                    onPress={() => alert("This feature is currently under development :(")}>
                     <Text style={styles.directionButtonText}> My Rides </Text>
                 </TouchableOpacity>
             </View>

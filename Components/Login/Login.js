@@ -36,7 +36,7 @@ export default class Login extends Component<{}> {
         }
         else {
             try {
-                let response = await fetch("http://127.0.0.1:8080/login/" + this.state.email + "/" + this.state.password, {
+                let response = await fetch("http://18.221.232.220:8080/login/" + this.state.email + "/" + this.state.password, {
                     method: 'get',
                     headers: {
                         'Accept': 'application/json',

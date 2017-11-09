@@ -20,29 +20,27 @@ export default class ChooseDirection extends Component<{}> {
         this.state = {
             email: this.props.navigation.state.params.email,
             password: this.props.navigation.state.params.password,
-            direction: this.props.navigation.state.params.direction,
-            times: this.props.navigation.state.params.times
         }
-}
+    }
     static navigationOptions = {
-        title: 'Pick A Time',
+        title: 'My Rides',
     };
-async bookTime(time){
-    posi = time.indexOf("(") - 1;
-    timeStr = time.substring(0, posi);
-    Alert.alert(
-        'Would you like to book this Shuttle?',
-        timeStr,
-        [
-            {text: 'Cancel'},
-            {text: 'Book it!', onPress: () => this.setTime(timeStr)},
-        ],
-        { cancelable: false }
-    )
-}
+    async bookTime(time){
+        posi = time.indexOf("(") - 1;
+        timeStr = time.substring(0, posi);
+        Alert.alert(
+            'Would you like to book this Shuttle?',
+            timeStr,
+            [
+                {text: 'Cancel'},
+                {text: 'Book it!', onPress: () => this.setTime(timeStr)},
+            ],
+            { cancelable: false }
+        )
+    }
     async setTime(time){
         try {
-            let response = await fetch("http://18.221.232.220:8080/bookride/" + this.state.email + "/" + this.state.password + "/" + this.state.direction + "/" + time, {
+            let response = await fetch("http://127.0.0.1:8080/bookride/" + this.state.email + "/" + this.state.password + "/" + this.state.direction + "/" + time, {
                 method: 'get',
                 headers: {
                     'Accept': 'application/json',
@@ -66,22 +64,22 @@ async bookTime(time){
         }
     }
 
-render(){
+    render(){
         let buttonList = this.state.times;
         buttonsListArr = [];
         console.log(buttonList);
 
         for (let i = 0; i < buttonList.length; i++)
         {
-        buttonsListArr.push(
-            <TouchableOpacity style={styles.directionButton} onPress =  {() => this.bookTime(buttonList[i])}><Text style = {styles.directionButtonText}>{buttonList[i]}</Text></TouchableOpacity>
-        );
+            buttonsListArr.push(
+                <TouchableOpacity style={styles.directionButton} onPress =  {() => this.bookTime(buttonList[i])}><Text style = {styles.directionButtonText}>{buttonList[i]}</Text></TouchableOpacity>
+            );
         }
         return (
             <View style={styles.container}>
-            <ScrollView>
-                {buttonsListArr}
-            </ScrollView>
+                <ScrollView>
+                    {buttonsListArr}
+                </ScrollView>
             </View>
         );
     }
