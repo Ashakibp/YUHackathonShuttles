@@ -1,19 +1,15 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 
 import {
-    Platform,
     StyleSheet,
     Text,
     View,
-    Image,
     TouchableOpacity,
-    TextInput,
-    Navigator,
 } from 'react-native';
 
 export default class PickSide extends Component<{}> {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             email: this.props.navigation.state.params.email,
@@ -35,24 +31,24 @@ export default class PickSide extends Component<{}> {
     }
 
 
-
-    render(){
+    render() {
         return (
             <View style={styles.container}>
                 <TouchableOpacity
-                    style = {styles.directionButton}
-                    onPress =  {() => {
+                    style={styles.directionButton}
+                    onPress={() => {
                         this.props.navigation.navigate('Choose Direction', {
                             email: this.state.email,
                             password: this.state.password,
                             direction: this.state.direction,
-                        })}}>
-                    <Text style = {styles.directionButtonText}> Book A Ride </Text>
+                        })
+                    }}>
+                    <Text style={styles.directionButtonText}> Book A Ride </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style = {styles.directionButton}
-                    onPress =  {() => alert("My Rides")}>
-                    <Text style = {styles.directionButtonText}> My Rides </Text>
+                    style={styles.directionButton}
+                    onPress={() => alert("My Rides")}>
+                    <Text style={styles.directionButtonText}> My Rides </Text>
                 </TouchableOpacity>
             </View>
         );
@@ -60,14 +56,14 @@ export default class PickSide extends Component<{}> {
 }
 const styles = StyleSheet.create({
         directionButton: {
-            backgroundColor: '#1433dc',
-            padding: 30,
+            backgroundColor: '#015697',
+            padding: 10,
             width: 250,
-            margin: 50,
+            margin: 15,
             justifyContent: 'center',
-            borderRadius: 15,
+            borderRadius: 10,
             alignItems: 'center',
-            height: 100,
+            height: 75,
         },
         container: {
             flex: 1,
@@ -79,11 +75,6 @@ const styles = StyleSheet.create({
             width: 130,
             height: 130
         },
-        welcome: {
-            fontSize: 30,
-            textAlign: 'center',
-            margin: 10,
-        },
         input: {
             margin: 15,
             height: 40,
@@ -91,16 +82,12 @@ const styles = StyleSheet.create({
             borderWidth: 1,
             width: 300
         },
-        directionButtonText:{
+        directionButtonText: {
             color: 'white',
             fontSize: 30,
             textAlign: 'center',
             justifyContent: 'center',
         },
-        instructions: {
-            fontSize: 30,
-            textAlign: 'center',
-            margin: 50,
-        },
 
-    });
+    }
+);
