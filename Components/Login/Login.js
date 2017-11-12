@@ -6,7 +6,10 @@ import {
     Image,
     TouchableOpacity,
     TextInput,
+    KeyboardAvoidingView,
 } from 'react-native';
+
+import Spinner from 'react-native-loading-spinner-overlay';
 
 export default class Login extends Component<{}> {
     constructor(props) {
@@ -22,16 +25,11 @@ export default class Login extends Component<{}> {
         title: 'Login',
     };
 
-    componentDidMount() {
-        setInterval(() => {
-            this.setState({
-                visible: !this.state.visible
-            });
-        }, 3000);
-    }
-
     async login(email, password) {
+        this.toggleState();
+        console.log(this.state.visible);
         if (email === null || password === null) {
+            this.toggleState(false);
             alert("Username and password must be full");
         }
         else {
@@ -45,18 +43,20 @@ export default class Login extends Component<{}> {
                 }).then((response) => response.json())
                     .then((responseData) => {
                         if (responseData['login'] === true) {
-
+                            this.toggleState();
                             this.props.navigation.navigate('Profile', {
                                 email: this.state.email,
                                 password: this.state.password
                             });
                         }
                         else {
-                            alert("Invalid Login")
+                            this.toggleState();
+                            alert("Invalid Login Please try again")
                         }
                     }).done();
             }
             catch (error) {
+                this.toggleState();
                 alert("Something went wrong - Please check your login");
                 return (<Login/>);
 
@@ -64,14 +64,21 @@ export default class Login extends Component<{}> {
         }
     }
 
+    toggleState = () => {
+        this.setState({ visible: !this.state.visible });
+    };
 
-    render() {
+render() {
         return (
-            <View style={styles.container}>
+            <KeyboardAvoidingView
+                style={styles.container}
+                behavior="padding"
+            >
                 <Image style={styles.imageStyle} source={require('./Resources/yuLogo.png')}/>
                 <Text style={styles.welcome}>
                     YU Shuttles
                 </Text>
+                <Spinner visible={this.state.visible} textContent={"Loading..."} textStyle={{color: '#FFF'}} />
                 <TextInput style={styles.input}
                            underlineColorAndroid="transparent"
                            placeholder="Email or Username"
@@ -91,7 +98,8 @@ export default class Login extends Component<{}> {
                     onPress={() => this.login(this.state.email, this.state.password)}>
                     <Text style={styles.submitButtonText}> Submit </Text>
                 </TouchableOpacity>
-            </View>
+                <View style={{ height: 60 }} />
+            </KeyboardAvoidingView>
         );
     }
 }

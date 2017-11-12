@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 
 
+
+import Spinner from 'react-native-loading-spinner-overlay';
 export default class ChooseDirection extends Component<{}> {
     constructor(props) {
         super(props);
@@ -22,8 +24,10 @@ export default class ChooseDirection extends Component<{}> {
         title: 'Choose Direction',
     };
 
+
     async chooseDirection(direction) {
         this.state.direction = direction;
+        this.toggleState();
         try {
             let response = await fetch("http://18.221.232.220:8080/gettimes/" + this.state.email + "/" + this.state.password + "/" + this.state.direction, {
                 method: 'get',
@@ -33,6 +37,7 @@ export default class ChooseDirection extends Component<{}> {
                 }
             }).then((response) => response.json())
                 .then((responseData) => {
+                        this.toggleState();
                         this.props.navigation.navigate('Pick A Time', {
                             email: this.state.email,
                             password: this.state.password,
@@ -42,12 +47,17 @@ export default class ChooseDirection extends Component<{}> {
                     }
                 ).done();
         }
-        catch (error) {
+        catch (err) {
+            this.toggleState();
             alert("Something went wrong - Please check your login");
             return (<Login/>);
 
         }
     }
+
+    toggleState = () => {
+        this.setState({ visible: !this.state.visible });
+    };
 
     render() {
         return (
@@ -55,6 +65,7 @@ export default class ChooseDirection extends Component<{}> {
                 <Text style={styles.instructions}>
                     Where do you want to go?
                 </Text>
+                <Spinner visible={this.state.visible} textContent={"Loading..."} textStyle={{color: '#FFF'}} />
                 <TouchableOpacity
                     style={styles.directionButton}
                     onPress={() => this.chooseDirection("wilf")}>

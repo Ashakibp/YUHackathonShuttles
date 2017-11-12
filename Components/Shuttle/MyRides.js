@@ -13,7 +13,7 @@ import {
     TextInput,
     Navigator
 } from 'react-native';
-import Login from '../../Components/Login/Login'
+import Login from '../Login/Login'
 export default class ChooseDirection extends Component<{}> {
     constructor(props){
         super(props);

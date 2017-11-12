@@ -8,7 +8,7 @@ import {
     ScrollView,
     TouchableOpacity,
 } from 'react-native';
-import Login from '../../Components/Login/Login'
+import Login from '../Login/Login'
 
 export default class ChooseDirection extends Component<{}> {
     constructor(props) {

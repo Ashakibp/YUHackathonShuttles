@@ -22,14 +22,6 @@ export default class PickSide extends Component<{}> {
         title: 'Profile',
     };
 
-    componentDidMount() {
-        setInterval(() => {
-            this.setState({
-                visible: !this.state.visible
-            });
-        }, 3000);
-    }
-
 
     render() {
         return (
