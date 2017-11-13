@@ -26,37 +26,35 @@ export default class Login extends Component<{}> {
     };
 
     async login(email, password) {
-        this.toggleState();
-        console.log(this.state.visible);
         if (email === null || password === null) {
-            this.toggleState(false);
             alert("Username and password must be full");
         }
         else {
             try {
+                this.setState({visible: true});
                 let response = await fetch("http://18.221.232.220:8080/login/" + this.state.email + "/" + this.state.password, {
                     method: 'get',
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
                     }
-                }).then((response) => response.json())
-                    .then((responseData) => {
-                        if (responseData['login'] === true) {
-                            this.toggleState();
-                            this.props.navigation.navigate('Profile', {
-                                email: this.state.email,
-                                password: this.state.password
-                            });
-                        }
-                        else {
-                            this.toggleState();
-                            alert("Invalid Login Please try again")
-                        }
-                    }).done();
+                });
+                const responseData = await response.json();
+                if (responseData['login'] === true) {
+                    this.setState({visible: false});
+                    this.props.navigation.navigate('Profile', {
+                        email: this.state.email,
+                        password: this.state.password
+                    });
+                }
+                else {
+                    this.setState({visible: false});
+                    setTimeout(() => { alert("Invalid Login"); }, 1);
+                }
             }
+
             catch (error) {
-                this.toggleState();
+                this.setState({visible: false});
                 alert("Something went wrong - Please check your login");
                 return (<Login/>);
 
@@ -64,12 +62,10 @@ export default class Login extends Component<{}> {
         }
     }
 
-    toggleState = () => {
-        this.setState({ visible: !this.state.visible });
-    };
 
-render() {
+    render() {
         return (
+
             <KeyboardAvoidingView
                 style={styles.container}
                 behavior="padding"
