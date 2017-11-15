@@ -8,8 +8,8 @@ import {
 } from 'react-native';
 
 
-
 import Spinner from 'react-native-loading-spinner-overlay';
+
 export default class ChooseDirection extends Component<{}> {
     constructor(props) {
         super(props);
@@ -49,14 +49,14 @@ export default class ChooseDirection extends Component<{}> {
         }
         catch (err) {
             this.toggleState();
-            alert("Something went wrong - Please check your login");
+            alert("Something went wrong - please check your login");
             return (<Login/>);
 
         }
     }
 
     toggleState = () => {
-        this.setState({ visible: !this.state.visible });
+        this.setState({visible: !this.state.visible});
     };
 
     render() {
@@ -65,7 +65,8 @@ export default class ChooseDirection extends Component<{}> {
                 <Text style={styles.instructions}>
                     Where do you want to go?
                 </Text>
-                <Spinner visible={this.state.visible} textContent={"Loading..."} textStyle={{color: '#FFF'}} />
+                <Spinner visible={this.state.visible} textContent={"Sorry, this loading time is YU's fault"}
+                         textStyle={{color: '#FFFF'}}/>
                 <TouchableOpacity
                     style={styles.directionButton}
                     onPress={() => this.chooseDirection("wilf")}>

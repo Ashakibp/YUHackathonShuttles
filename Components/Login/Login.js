@@ -49,7 +49,9 @@ export default class Login extends Component<{}> {
                 }
                 else {
                     this.setState({visible: false});
-                    setTimeout(() => { alert("Invalid Login"); }, 1);
+                    setTimeout(() => {
+                        alert("Invalid Login");
+                    }, 1);
                 }
             }
 
@@ -70,11 +72,12 @@ export default class Login extends Component<{}> {
                 style={styles.container}
                 behavior="padding"
             >
-                <Image style={styles.imageStyle} source={require('./Resources/yuLogo.png')}/>
+                <Image style={styles.imageStyle} source={require('./Resources/officialYuLogo.png')}/>
                 <Text style={styles.welcome}>
                     YU Shuttles
                 </Text>
-                <Spinner visible={this.state.visible} textContent={"Loading..."} textStyle={{color: '#FFF'}} />
+                <Spinner visible={this.state.visible} textContent={"Sorry, this loading time is YU's fault"}
+                         textStyle={{color: '#FFFF'}}/>
                 <TextInput style={styles.input}
                            underlineColorAndroid="transparent"
                            placeholder="Email or Username"
@@ -94,7 +97,7 @@ export default class Login extends Component<{}> {
                     onPress={() => this.login(this.state.email, this.state.password)}>
                     <Text style={styles.submitButtonText}> Submit </Text>
                 </TouchableOpacity>
-                <View style={{ height: 60 }} />
+                <View style={{height: 60}}/>
             </KeyboardAvoidingView>
         );
     }

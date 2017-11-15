@@ -20,6 +20,7 @@ export default class PickSide extends Component<{}> {
 
     static navigationOptions = {
         title: 'Profile',
+        headerLeft: null
     };
 
 

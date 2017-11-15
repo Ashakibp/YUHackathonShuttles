@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 import {
     Platform,
@@ -14,31 +14,35 @@ import {
     Navigator
 } from 'react-native';
 import Login from '../Login/Login'
+
 export default class ChooseDirection extends Component<{}> {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             email: this.props.navigation.state.params.email,
             password: this.props.navigation.state.params.password,
         }
     }
+
     static navigationOptions = {
         title: 'My Rides',
     };
-    async bookTime(time){
+
+    async bookTime(time) {
         posi = time.indexOf("(") - 1;
         timeStr = time.substring(0, posi);
         Alert.alert(
-            'Would you like to book this Shuttle?',
+            'Would you like to book this shuttle?',
             timeStr,
             [
                 {text: 'Cancel'},
                 {text: 'Book it!', onPress: () => this.setTime(timeStr)},
             ],
-            { cancelable: false }
+            {cancelable: false}
         )
     }
-    async setTime(time){
+
+    async setTime(time) {
         try {
             let response = await fetch("http://127.0.0.1:8080/bookride/" + this.state.email + "/" + this.state.password + "/" + this.state.direction + "/" + time, {
                 method: 'get',
@@ -64,15 +68,15 @@ export default class ChooseDirection extends Component<{}> {
         }
     }
 
-    render(){
+    render() {
         let buttonList = this.state.times;
         buttonsListArr = [];
         console.log(buttonList);
 
-        for (let i = 0; i < buttonList.length; i++)
-        {
+        for (let i = 0; i < buttonList.length; i++) {
             buttonsListArr.push(
-                <TouchableOpacity style={styles.directionButton} onPress =  {() => this.bookTime(buttonList[i])}><Text style = {styles.directionButtonText}>{buttonList[i]}</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.directionButton} onPress={() => this.bookTime(buttonList[i])}><Text
+                    style={styles.directionButtonText}>{buttonList[i]}</Text></TouchableOpacity>
             );
         }
         return (
@@ -109,7 +113,7 @@ const styles = StyleSheet.create({
             fontSize: 60,
             textAlign: 'center',
             margin: 10,
-            marginBottom:60
+            marginBottom: 60
         },
         input: {
             margin: 15,
@@ -118,7 +122,7 @@ const styles = StyleSheet.create({
             borderWidth: 1,
             width: 300
         },
-        directionButtonText:{
+        directionButtonText: {
             color: 'white',
             fontSize: 18,
             textAlign: 'center',

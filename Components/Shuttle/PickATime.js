@@ -29,7 +29,7 @@ export default class ChooseDirection extends Component<{}> {
         posi = time.indexOf("(") - 1;
         timeStr = time.substring(0, posi);
         Alert.alert(
-            'Would you like to book this Shuttle?',
+            'Would you like to book this shuttle?',
             timeStr,
             [
                 {text: 'Cancel'},
