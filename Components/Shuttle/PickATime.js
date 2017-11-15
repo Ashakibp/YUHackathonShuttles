@@ -49,7 +49,7 @@ export default class ChooseDirection extends Component<{}> {
                 }
             }).then((response) => response.json())
                 .then((responseData) => {
-                    if (responseData['worked'] == true) {
+                    if (responseData['worked'] === true) {
                         alert("Shuttle is Booked!");
                         this.props.navigation.navigate('Profile', {
                             email: this.state.email,

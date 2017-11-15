@@ -50,14 +50,14 @@ export default class Login extends Component<{}> {
                 else {
                     this.setState({visible: false});
                     setTimeout(() => {
-                        alert("Invalid Login");
+                        alert("Invalid login");
                     }, 1);
                 }
             }
 
             catch (error) {
                 this.setState({visible: false});
-                alert("Something went wrong - Please check your login");
+                alert("Something went wrong - please check your login");
                 return (<Login/>);
 
             }
