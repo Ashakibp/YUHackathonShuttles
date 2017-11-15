@@ -72,7 +72,7 @@ export default class Login extends Component<{}> {
                 style={styles.container}
                 behavior="padding"
             >
-                <Image style={styles.imageStyle} source={require('./Resources/officialYuLogo.png')}/>
+                <Image style={styles.imageStyle} source={require('./Resources/yuLogo.png')}/>
                 <Text style={styles.welcome}>
                     YU Shuttles
                 </Text>
@@ -111,8 +111,8 @@ const styles = StyleSheet.create({
             backgroundColor: '#fbfbff',
         },
         imageStyle: {
-            width: 130,
-            height: 130
+            width: 200,
+            height: 200
         },
         welcome: {
             fontSize: 40,
