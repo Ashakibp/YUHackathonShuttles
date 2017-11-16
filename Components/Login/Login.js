@@ -74,10 +74,10 @@ export default class Login extends Component<{}> {
             >
                 <Image style={styles.imageStyle} source={require('./Resources/yuLogo.png')}/>
                 <Text style={styles.welcome}>
-                    YU Shuttles
+                    YUShuttles
                 </Text>
                 <Spinner visible={this.state.visible} textContent={"Sorry, this loading time is YU's fault"}
-                         textStyle={{color: '#FFFF'}}/>
+                         textStyle={{color: '#FFFFFF'}}/>
                 <TextInput style={styles.input}
                            underlineColorAndroid="transparent"
                            placeholder="Email or Username"
@@ -111,8 +111,8 @@ const styles = StyleSheet.create({
             backgroundColor: '#fbfbff',
         },
         imageStyle: {
-            width: 200,
-            height: 200
+            width: 175,
+            height: 175
         },
         welcome: {
             fontSize: 40,
