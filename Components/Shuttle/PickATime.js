@@ -48,10 +48,10 @@ export default class ChooseDirection extends Component<{}> {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    username: this.state.email,
+                    username : this.state.email,
                     password: this.state.password,
                     direction: this.state.direction,
-                    time: time,
+                    time: time
                 })
             }).then((response) => response.json())
                 .then((responseData) => {

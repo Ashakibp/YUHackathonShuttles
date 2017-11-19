@@ -39,8 +39,8 @@ export default class Login extends Component<{}> {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        "username": this.state.email,
-                        "password": this.state.password,
+                        username: this.state.email,
+                        password: this.state.password
                     })
                 });
                 const responseData = await response.json();
@@ -48,7 +48,7 @@ export default class Login extends Component<{}> {
                     this.setState({visible: false});
                     this.props.navigation.navigate('Profile', {
                         email: this.state.email,
-                        password: this.state.password
+                        password: this.state.password,
                     });
                 }
                 else {
