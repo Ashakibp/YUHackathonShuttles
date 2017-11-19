@@ -29,7 +29,7 @@ export default class ChooseDirection extends Component<{}> {
         posi = time.indexOf("(") - 1;
         timeStr = time.substring(0, posi);
         Alert.alert(
-            'Would you like to book this Shuttle?',
+            'Would you like to book this shuttle?',
             timeStr,
             [
                 {text: 'Cancel'},
@@ -55,8 +55,8 @@ export default class ChooseDirection extends Component<{}> {
                 })
             }).then((response) => response.json())
                 .then((responseData) => {
-                    if (responseData['worked'] == true) {
-                        alert("Shuttle is Booked!");
+                    if (responseData['worked'] === true) {
+                        alert("Shuttle has been booked!");
                         this.props.navigation.navigate('Profile', {
                             email: this.state.email,
                             password: this.state.password

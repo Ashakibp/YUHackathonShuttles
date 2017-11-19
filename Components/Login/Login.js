@@ -53,13 +53,15 @@ export default class Login extends Component<{}> {
                 }
                 else {
                     this.setState({visible: false});
-                    setTimeout(() => { alert("Invalid Login"); }, 1);
+                    setTimeout(() => {
+                        alert("Invalid login");
+                    }, 1);
                 }
             }
 
             catch (error) {
                 this.setState({visible: false});
-                alert("Something went wrong - Please check your login");
+                alert("Something went wrong - please check your login");
                 return (<Login/>);
 
             }
@@ -76,9 +78,10 @@ export default class Login extends Component<{}> {
             >
                 <Image style={styles.imageStyle} source={require('./Resources/yuLogo.png')}/>
                 <Text style={styles.welcome}>
-                    YU Shuttles
+                    YUShuttles
                 </Text>
-                <Spinner visible={this.state.visible} textContent={"Loading..."} textStyle={{color: '#FFF'}} />
+                <Spinner visible={this.state.visible} textContent={"Sorry, this loading time is YU's fault"}
+                         textStyle={{color: '#FFFFFF'}}/>
                 <TextInput style={styles.input}
                            underlineColorAndroid="transparent"
                            placeholder="Email or Username"
@@ -98,7 +101,7 @@ export default class Login extends Component<{}> {
                     onPress={() => this.login(this.state.email, this.state.password)}>
                     <Text style={styles.submitButtonText}> Submit </Text>
                 </TouchableOpacity>
-                <View style={{ height: 60 }} />
+                <View style={{height: 60}}/>
             </KeyboardAvoidingView>
         );
     }
@@ -112,8 +115,8 @@ const styles = StyleSheet.create({
             backgroundColor: '#fbfbff',
         },
         imageStyle: {
-            width: 130,
-            height: 130
+            width: 175,
+            height: 175
         },
         welcome: {
             fontSize: 40,
