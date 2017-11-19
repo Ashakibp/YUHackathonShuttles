@@ -29,7 +29,7 @@ export default class ChooseDirection extends Component<{}> {
         this.setState({direction: direction});
         this.toggleState();
         try {
-            let response = await fetch("http://18.221.232.220:8080/gettimes", {
+            let response = await fetch("http://18.221.232.220:8080/gettimes/", {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

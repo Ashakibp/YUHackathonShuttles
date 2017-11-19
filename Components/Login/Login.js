@@ -32,15 +32,15 @@ export default class Login extends Component<{}> {
         else {
             try {
                 this.setState({visible: true});
-                let response = await fetch("http://18.221.232.220:8080/login",{
+                let response = await fetch("http://18.221.232.220:8080/login/",{
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        username: this.state.email,
-                        password: this.state.password,
+                        "username": this.state.email,
+                        "password": this.state.password,
                     })
                 });
                 const responseData = await response.json();
@@ -61,8 +61,9 @@ export default class Login extends Component<{}> {
 
             catch (error) {
                 this.setState({visible: false});
-                alert("Something went wrong - please check your login");
-                return (<Login/>);
+                setTimeout(() => {
+                    alert("Something went wrong - please check your login");
+                }, 1);
 
             }
         }
