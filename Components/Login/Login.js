@@ -32,7 +32,7 @@ export default class Login extends Component<{}> {
         else {
             try {
                 this.setState({visible: true});
-                let response = await fetch("http://18.221.232.220:8080/login/",{
+                let response = await fetch("http://18.221.232.220:8080/login",{
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
@@ -80,7 +80,7 @@ export default class Login extends Component<{}> {
                 <Text style={styles.welcome}>
                     YUShuttles
                 </Text>
-                <Spinner visible={this.state.visible} textContent={"Sorry, this loading time is YU's fault"}
+                <Spinner visible={this.state.visible} textContent={"Loading"}
                          textStyle={{color: '#FFFFFF'}}/>
                 <TextInput style={styles.input}
                            underlineColorAndroid="transparent"

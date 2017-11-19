@@ -41,7 +41,7 @@ export default class ChooseDirection extends Component<{}> {
 
     async setTime(time) {
         try {
-            let response = await fetch("http://18.221.232.220:8080/bookride/", {
+            let response = await fetch("http://18.221.232.220:8080/bookride", {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
