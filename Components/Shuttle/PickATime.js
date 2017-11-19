@@ -41,12 +41,18 @@ export default class ChooseDirection extends Component<{}> {
 
     async setTime(time) {
         try {
-            let response = await fetch("http://18.221.232.220:8080/bookride/" + this.state.email + "/" + this.state.password + "/" + this.state.direction + "/" + time, {
-                method: 'get',
+            let response = await fetch("http://18.221.232.220:8080/bookride/", {
+                method: 'POST',
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: this.state.email,
+                    password: this.state.password,
+                    direction: this.state.direction,
+                    time: time,
+                })
             }).then((response) => response.json())
                 .then((responseData) => {
                     if (responseData['worked'] == true) {

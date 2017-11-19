@@ -32,12 +32,16 @@ export default class Login extends Component<{}> {
         else {
             try {
                 this.setState({visible: true});
-                let response = await fetch("http://18.221.232.220:8080/login/" + this.state.email + "/" + this.state.password, {
-                    method: 'get',
+                let response = await fetch("http://18.221.232.220:8080/login/",{
+                    method: 'POST',
                     headers: {
                         'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    }
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: this.state.email,
+                        password: this.state.password,
+                    })
                 });
                 const responseData = await response.json();
                 if (responseData['login'] === true) {
