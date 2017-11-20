@@ -53,8 +53,8 @@ export default class ChooseDirection extends Component<{}> {
                     direction: this.state.direction,
                     time: time
                 })
-            }).then((response) => response.json())
-                .then((responseData) => {
+            });
+                    const responseData = await response.json();
                     if (responseData['worked'] === true) {
                         alert("Shuttle has been booked!");
                         this.props.navigation.navigate('Profile', {
@@ -62,7 +62,11 @@ export default class ChooseDirection extends Component<{}> {
                             password: this.state.password
                         });
                     }
-                }).done();
+                    else {
+                        setTimeout(() => {
+                            alert("Something went wrong");
+                        }, 1);
+                    }
         }
         catch (error) {
             alert("Something went wrong :(");

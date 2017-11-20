@@ -33,26 +33,26 @@ export default class Login extends Component<{}> {
             try {
                 this.setState({visible: true});
                 let response = await fetch("http://18.221.232.220:8080/login/",{
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        username: this.state.email,
-                        password: this.state.password
-                    })
-                });
-                const responseData = await response.json();
-                if (responseData['login'] === true) {
-                    this.setState({visible: false});
-                    this.props.navigation.navigate('Profile', {
-                        email: this.state.email,
-                        password: this.state.password,
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            username: this.state.email,
+                            password: this.state.password
+                        })
                     });
-                }
-                else {
-                    this.setState({visible: false});
+                    const responseData = await response.json();
+                    if (responseData['login'] === true) {
+                        this.setState({visible: false});
+                        this.props.navigation.navigate('Profile', {
+                            email: this.state.email,
+                            password: this.state.password,
+                        });
+                    }
+                    else {
+                        this.setState({visible: false});
                     setTimeout(() => {
                         alert("Invalid login");
                     }, 1);
