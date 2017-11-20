@@ -10,6 +10,8 @@
     "native-base": "^2.3.3",
     "react": "16.0.0-beta.5",
     "react-native": "0.49.5",
+    "react-native-bem-check-box": "^1.0.0",
+    "react-native-check-box": "^2.0.2",
     "react-native-loading-spinner-overlay": "^0.5.2",
     "react-navigation": "^1.0.0-beta.17"
   },
