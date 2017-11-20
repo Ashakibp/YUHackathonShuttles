@@ -6,4 +6,4 @@ This application originally started during the Invent YU hackathon, however due 
 
 
 ### UPDATE
-Currently in beta testing phase with IOS using Test Flight
+Officially on the IOS App Store, and Google Play store!
