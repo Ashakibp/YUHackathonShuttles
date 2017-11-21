@@ -7,7 +7,6 @@ import {
     TouchableOpacity,
     TextInput,
     KeyboardAvoidingView,
-    AsyncStorage,
 } from 'react-native';
 
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -18,8 +17,7 @@ export default class Login extends Component<{}> {
         this.state = {
             email: null,
             password: null,
-            visible: false,
-            save: false
+            visible: false
         }
     }
 
@@ -48,7 +46,6 @@ export default class Login extends Component<{}> {
                     const responseData = await response.json();
                     if (responseData['login'] === true) {
                         this.setState({visible: false});
-                        this.storeUsernameAndPassword();
                         this.props.navigation.navigate('Profile', {
                             email: this.state.email,
                             password: this.state.password,
@@ -69,39 +66,6 @@ export default class Login extends Component<{}> {
                 }, 1);
 
             }
-        }
-    }
-
-    async storeUsernameAndPassword(){
-        try{
-            await AsyncStorage.setItem('username', this.state.email)
-            await AsyncStorage.setItem('password', this.state.password)
-        }
-        catch(error){
-            console.log("ERROR")
-        }
-    }
-
-    async getUsernameAndPassword(){
-        try{
-            const email = await AsyncStorage.getItem('username');
-            const password = await AsyncStorage.getItem('password');
-
-            if(email != null && password != null){
-                this.setState({
-                email: email,
-                password: password
-                });
-                this.props.navigation.navigate('Profile', {
-                    email: this.state.email,
-                    password: this.state.password,
-                });
-            }
-            else{
-                alert("No previous login available")
-            }
-        }
-        catch(error){
         }
     }
 
@@ -137,11 +101,6 @@ export default class Login extends Component<{}> {
                     style={styles.submitButton}
                     onPress={() => this.login(this.state.email, this.state.password)}>
                     <Text style={styles.submitButtonText}> Submit </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.lastLoginButton}
-                    onPress={() => this.getUsernameAndPassword()}>
-                    <Text style={styles.lastLogin}>Use last working login</Text>
                 </TouchableOpacity>
                 <View style={{height: 60}}/>
             </KeyboardAvoidingView>
@@ -183,19 +142,6 @@ const styles = StyleSheet.create({
             margin: 15,
             height: 50,
             width: 150,
-        },
-        lastLoginButton: {
-            backgroundColor: '#015697',
-            padding: 7,
-            borderRadius: 7,
-            margin: 0,
-            height: 50,
-            width: 150,
-        },
-        lastLogin: {
-            color: 'white',
-            fontSize: 15,
-            textAlign: 'center',
         },
         submitButtonText: {
             color: 'white',
