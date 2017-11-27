@@ -5,6 +5,7 @@ import {
     Text,
     View,
     TouchableOpacity,
+    AsyncStorage,
 } from 'react-native';
 
 
@@ -55,10 +56,22 @@ export default class ChooseDirection extends Component<{}> {
         catch (err) {
             this.toggleState();
             alert("Something went wrong - please check your login");
+            this.wipeLogin();
             return (<Login/>);
 
         }
     }
+
+    async wipeLogin(){
+        try{
+            await AsyncStorage.setItem('username', null);
+            await AsyncStorage.setItem('password', null);
+        }
+        catch(error){
+            console.log("ERROR");
+        }
+    }
+
 
     toggleState = () => {
         this.setState({visible: !this.state.visible});

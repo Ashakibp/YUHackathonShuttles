@@ -58346,15 +58346,15 @@ var _Login = require(556                       ); // 556 = ./Components/Login/Lo
 
 var _Login2 = _interopRequireDefault(_Login);
 
-var _ChooseDirection = require(563                                   ); // 563 = ./Components/Shuttle/ChooseDirection
+var _ChooseDirection = require(559                                   ); // 559 = ./Components/Shuttle/ChooseDirection
 
 var _ChooseDirection2 = _interopRequireDefault(_ChooseDirection);
 
-var _PickSide = require(564                            ); // 564 = ./Components/Profile/PickSide
+var _PickSide = require(560                            ); // 560 = ./Components/Profile/PickSide
 
 var _PickSide2 = _interopRequireDefault(_PickSide);
 
-var _PickATime = require(565                             ); // 565 = ./Components/Shuttle/PickATime
+var _PickATime = require(561                             ); // 561 = ./Components/Shuttle/PickATime
 
 var _PickATime2 = _interopRequireDefault(_PickATime);
 
@@ -67384,11 +67384,7 @@ var _class,
 
 var _reactNative = require(12            ); // 12 = react-native
 
-var _reactNativeCheckBox = require(557                     ); // 557 = react-native-check-box
-
-var _reactNativeCheckBox2 = _interopRequireDefault(_reactNativeCheckBox);
-
-var _reactNativeLoadingSpinnerOverlay = require(561                                   ); // 561 = react-native-loading-spinner-overlay
+var _reactNativeLoadingSpinnerOverlay = require(557                                   ); // 557 = react-native-loading-spinner-overlay
 
 var _reactNativeLoadingSpinnerOverlay2 = _interopRequireDefault(_reactNativeLoadingSpinnerOverlay);
 
@@ -67430,85 +67426,60 @@ var Login = _wrapComponent('Login')((_temp = _class = function (_Component) {
         _this.state = {
             email: null,
             password: null,
-            visible: false,
-            save: false
+            visible: false
         };
         return _this;
     }
 
     _createClass(Login, [{
-        key: 'login',
-        value: function login(email, password) {
-            var response, responseData;
-            return regeneratorRuntime.async(function login$(_context) {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.getUsernameAndPassword();
+        }
+    }, {
+        key: 'getUsernameAndPassword',
+        value: function getUsernameAndPassword() {
+            var email, password;
+            return regeneratorRuntime.async(function getUsernameAndPassword$(_context) {
                 while (1) {
                     switch (_context.prev = _context.next) {
                         case 0:
-                            if (!(email === null || password === null)) {
-                                _context.next = 4;
-                                break;
-                            }
+                            _context.prev = 0;
+                            _context.next = 3;
+                            return regeneratorRuntime.awrap(_reactNative.AsyncStorage.getItem('username'));
 
-                            alert("Username and password must be full");
-                            _context.next = 19;
-                            break;
+                        case 3:
+                            email = _context.sent;
+                            _context.next = 6;
+                            return regeneratorRuntime.awrap(_reactNative.AsyncStorage.getItem('password'));
 
-                        case 4:
-                            _context.prev = 4;
+                        case 6:
+                            password = _context.sent;
 
-                            this.setState({ visible: true });
-                            _context.next = 8;
-                            return regeneratorRuntime.awrap(fetch("http://18.221.232.220:8080/login/", {
-                                method: 'POST',
-                                headers: {
-                                    'Accept': 'application/json',
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify({
-                                    username: this.state.email,
-                                    password: this.state.password
-                                })
-                            }));
 
-                        case 8:
-                            response = _context.sent;
-                            _context.next = 11;
-                            return regeneratorRuntime.awrap(response.json());
-
-                        case 11:
-                            responseData = _context.sent;
-
-                            if (responseData['login'] === true) {
-                                this.setState({ visible: false });
-                                this.storeUsernameAndPassword();
+                            if (email != null && password != null) {
+                                this.setState({
+                                    email: email,
+                                    password: password
+                                });
                                 this.props.navigation.navigate('Profile', {
                                     email: this.state.email,
                                     password: this.state.password
                                 });
-                            } else {
-                                this.setState({ visible: false });
-                                setTimeout(function () {
-                                    alert("Invalid login");
-                                }, 1);
                             }
-                            _context.next = 19;
+                            _context.next = 12;
                             break;
 
-                        case 15:
-                            _context.prev = 15;
-                            _context.t0 = _context['catch'](4);
+                        case 10:
+                            _context.prev = 10;
+                            _context.t0 = _context['catch'](0);
 
-                            this.setState({ visible: false });
-                            setTimeout(function () {
-                                alert("Something went wrong - please check your login");
-                            }, 1);
-
-                        case 19:
+                        case 12:
                         case 'end':
                             return _context.stop();
                     }
                 }
-            }, null, this, [[4, 15]]);
+            }, null, this, [[0, 10]]);
         }
     }, {
         key: 'storeUsernameAndPassword',
@@ -67543,51 +67514,78 @@ var Login = _wrapComponent('Login')((_temp = _class = function (_Component) {
             }, null, this, [[0, 7]]);
         }
     }, {
-        key: 'getUsernameAndPassword',
-        value: function getUsernameAndPassword() {
-            var email, password;
-            return regeneratorRuntime.async(function getUsernameAndPassword$(_context3) {
+        key: 'login',
+        value: function login(email, password) {
+            var response, responseData;
+            return regeneratorRuntime.async(function login$(_context3) {
                 while (1) {
                     switch (_context3.prev = _context3.next) {
                         case 0:
-                            _context3.prev = 0;
-                            _context3.next = 3;
-                            return regeneratorRuntime.awrap(_reactNative.AsyncStorage.getItem('username'));
+                            if (!(email === null || password === null)) {
+                                _context3.next = 4;
+                                break;
+                            }
 
-                        case 3:
-                            email = _context3.sent;
-                            _context3.next = 6;
-                            return regeneratorRuntime.awrap(_reactNative.AsyncStorage.getItem('password'));
+                            alert("Username and password must be full");
+                            _context3.next = 19;
+                            break;
 
-                        case 6:
-                            password = _context3.sent;
+                        case 4:
+                            _context3.prev = 4;
 
+                            this.setState({ visible: true });
+                            _context3.next = 8;
+                            return regeneratorRuntime.awrap(fetch("http://18.221.232.220:8080/login/", {
+                                method: 'POST',
+                                headers: {
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    username: this.state.email,
+                                    password: this.state.password
+                                })
+                            }));
 
-                            if (email != null && password != null) {
-                                this.setState({
-                                    email: email,
-                                    password: password
-                                });
+                        case 8:
+                            response = _context3.sent;
+                            _context3.next = 11;
+                            return regeneratorRuntime.awrap(response.json());
+
+                        case 11:
+                            responseData = _context3.sent;
+
+                            if (responseData['login'] === true) {
+                                this.setState({ visible: false });
+                                this.storeUsernameAndPassword();
                                 this.props.navigation.navigate('Profile', {
                                     email: this.state.email,
                                     password: this.state.password
                                 });
                             } else {
-                                alert("No previous login available");
+                                this.setState({ visible: false });
+                                setTimeout(function () {
+                                    alert("Invalid login");
+                                }, 1);
                             }
-                            _context3.next = 12;
+                            _context3.next = 19;
                             break;
 
-                        case 10:
-                            _context3.prev = 10;
-                            _context3.t0 = _context3['catch'](0);
+                        case 15:
+                            _context3.prev = 15;
+                            _context3.t0 = _context3['catch'](4);
 
-                        case 12:
+                            this.setState({ visible: false });
+                            setTimeout(function () {
+                                alert("Something went wrong - please check your login");
+                            }, 1);
+
+                        case 19:
                         case 'end':
                             return _context3.stop();
                     }
                 }
-            }, null, this, [[0, 10]]);
+            }, null, this, [[4, 15]]);
         }
     }, {
         key: 'render',
@@ -67601,19 +67599,19 @@ var Login = _wrapComponent('Login')((_temp = _class = function (_Component) {
                     behavior: 'padding',
                     __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 114
+                        lineNumber: 116
                     }
                 },
-                _react3.default.createElement(_reactNative.Image, { style: styles.imageStyle, source: require(562                     ), __source: { // 562 = ./Resources/yuLogo.png
+                _react3.default.createElement(_reactNative.Image, { style: styles.imageStyle, source: require(558                     ), __source: { // 558 = ./Resources/yuLogo.png
                         fileName: _jsxFileName,
-                        lineNumber: 118
+                        lineNumber: 120
                     }
                 }),
                 _react3.default.createElement(
                     _reactNative.Text,
                     { style: styles.welcome, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 119
+                            lineNumber: 121
                         }
                     },
                     'YUShuttles'
@@ -67621,7 +67619,7 @@ var Login = _wrapComponent('Login')((_temp = _class = function (_Component) {
                 _react3.default.createElement(_reactNativeLoadingSpinnerOverlay2.default, { visible: this.state.visible, textContent: "Loading",
                     textStyle: { color: '#FFFFFF' }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 122
+                        lineNumber: 124
                     }
                 }),
                 _react3.default.createElement(_reactNative.TextInput, { style: styles.input,
@@ -67633,7 +67631,7 @@ var Login = _wrapComponent('Login')((_temp = _class = function (_Component) {
                         return _this2.setState({ email: email });
                     }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 124
+                        lineNumber: 126
                     }
                 }),
                 _react3.default.createElement(_reactNative.TextInput, { style: styles.input,
@@ -67646,7 +67644,7 @@ var Login = _wrapComponent('Login')((_temp = _class = function (_Component) {
                         return _this2.setState({ password: password });
                     }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 131
+                        lineNumber: 133
                     }
                 }),
                 _react3.default.createElement(
@@ -67657,43 +67655,22 @@ var Login = _wrapComponent('Login')((_temp = _class = function (_Component) {
                             return _this2.login(_this2.state.email, _this2.state.password);
                         }, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 138
+                            lineNumber: 140
                         }
                     },
                     _react3.default.createElement(
                         _reactNative.Text,
                         { style: styles.submitButtonText, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 141
+                                lineNumber: 143
                             }
                         },
                         ' Submit '
                     )
                 ),
-                _react3.default.createElement(
-                    _reactNative.TouchableOpacity,
-                    {
-                        style: styles.lastLoginButton,
-                        onPress: function onPress() {
-                            return _this2.getUsernameAndPassword();
-                        }, __source: {
-                            fileName: _jsxFileName,
-                            lineNumber: 143
-                        }
-                    },
-                    _react3.default.createElement(
-                        _reactNative.Text,
-                        { style: styles.lastLogin, __source: {
-                                fileName: _jsxFileName,
-                                lineNumber: 146
-                            }
-                        },
-                        'Use last working login'
-                    )
-                ),
                 _react3.default.createElement(_reactNative.View, { style: { height: 60 }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 148
+                        lineNumber: 145
                     }
                 })
             );
@@ -67743,19 +67720,6 @@ var styles = _reactNative.StyleSheet.create({
         height: 50,
         width: 150
     },
-    lastLoginButton: {
-        backgroundColor: '#015697',
-        padding: 7,
-        borderRadius: 7,
-        margin: 0,
-        height: 50,
-        width: 150
-    },
-    lastLogin: {
-        color: 'white',
-        fontSize: 15,
-        textAlign: 'center'
-    },
     submitButtonText: {
         color: 'white',
         fontSize: 20,
@@ -67764,217 +67728,6 @@ var styles = _reactNative.StyleSheet.create({
 
 });
 }, 556, null, "YUShuttles/Components/Login/Login.js");
-__d(/* react-native-check-box/index.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _react2 = require(36     ); // 36 = react
-
-var _react3 = _interopRequireDefault(_react2);
-
-var _index = require(159                                    ); // 159 = ./../react-transform-hmr/lib/index.js
-
-var _index2 = _interopRequireDefault(_index);
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _class,
-    _temp,
-    _jsxFileName = '/Users/Aaron/work/YUHackathon/node_modules/react-native-check-box/index.js';
-
-var _reactNative = require(12            ); // 12 = react-native
-
-var _propTypes = require(126         ); // 126 = prop-types
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var _components = {
-    CheckBox: {
-        displayName: 'CheckBox'
-    }
-};
-
-var _reactTransformHmrLibIndexJs2 = (0, _index2.default)({
-    filename: '/Users/Aaron/work/YUHackathon/node_modules/react-native-check-box/index.js',
-    components: _components,
-    locals: [module],
-    imports: [_react3.default]
-});
-
-function _wrapComponent(id) {
-    return function (Component) {
-        return _reactTransformHmrLibIndexJs2(Component, id);
-    };
-}
-
-var CheckBox = _wrapComponent('CheckBox')((_temp = _class = function (_Component) {
-    _inherits(CheckBox, _Component);
-
-    function CheckBox(props) {
-        _classCallCheck(this, CheckBox);
-
-        var _this = _possibleConstructorReturn(this, (CheckBox.__proto__ || Object.getPrototypeOf(CheckBox)).call(this, props));
-
-        _this.state = {
-            isChecked: _this.props.isChecked
-        };
-        return _this;
-    }
-
-    _createClass(CheckBox, [{
-        key: 'onClick',
-        value: function onClick() {
-            this.setState({
-                isChecked: !this.state.isChecked
-            });
-            this.props.onClick();
-        }
-    }, {
-        key: '_renderLeft',
-        value: function _renderLeft() {
-            if (this.props.leftTextView) return this.props.leftTextView;
-            if (!this.props.leftText) return null;
-            return _react3.default.createElement(
-                _reactNative.Text,
-                { style: [styles.leftText, this.props.leftTextStyle], __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 61
-                    }
-                },
-                this.props.leftText
-            );
-        }
-    }, {
-        key: '_renderRight',
-        value: function _renderRight() {
-            if (this.props.rightTextView) return this.props.rightTextView;
-            if (!this.props.rightText) return null;
-            return _react3.default.createElement(
-                _reactNative.Text,
-                { style: [styles.rightText, this.props.rightTextStyle], __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 68
-                    }
-                },
-                this.props.rightText
-            );
-        }
-    }, {
-        key: '_renderImage',
-        value: function _renderImage() {
-            if (this.props.isIndeterminate) {
-                return this.props.indeterminateImage ? this.props.indeterminateImage : this.genCheckedImage();
-            }
-            if (this.state.isChecked) {
-                return this.props.checkedImage ? this.props.checkedImage : this.genCheckedImage();
-            } else {
-                return this.props.unCheckedImage ? this.props.unCheckedImage : this.genCheckedImage();
-            }
-        }
-    }, {
-        key: 'genCheckedImage',
-        value: function genCheckedImage() {
-            var source;
-            if (this.props.isIndeterminate) {
-                source = require(558                                   ); // 558 = ./img/ic_indeterminate_check_box.png
-            } else {
-                source = this.state.isChecked ? require(559                     ) : require(560                                   ); // 560 = ./img/ic_check_box_outline_blank.png // 559 = ./img/ic_check_box.png
-            }
-
-            return _react3.default.createElement(_reactNative.Image, { source: source, style: { tintColor: this.props.checkBoxColor }, __source: {
-                    fileName: _jsxFileName,
-                    lineNumber: 93
-                }
-            });
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            var _this2 = this;
-
-            return _react3.default.createElement(
-                _reactNative.TouchableHighlight,
-                {
-                    style: this.props.style,
-                    onPress: function onPress() {
-                        return _this2.onClick();
-                    },
-                    underlayColor: 'transparent',
-                    disabled: this.props.disabled,
-                    __source: {
-                        fileName: _jsxFileName,
-                        lineNumber: 99
-                    }
-                },
-                _react3.default.createElement(
-                    _reactNative.View,
-                    { style: styles.container, __source: {
-                            fileName: _jsxFileName,
-                            lineNumber: 105
-                        }
-                    },
-                    this._renderLeft(),
-                    this._renderImage(),
-                    this._renderRight()
-                )
-            );
-        }
-    }]);
-
-    return CheckBox;
-}(_react2.Component), _class.propTypes = _extends({}, _reactNative.ViewPropTypes || _reactNative.View.PropTypes, {
-    leftText: _propTypes2.default.string,
-    leftTextView: _propTypes2.default.element,
-    rightText: _propTypes2.default.string,
-    leftTextStyle: _propTypes2.default.object,
-    rightTextView: _propTypes2.default.element,
-    rightTextStyle: _propTypes2.default.object,
-    checkedImage: _propTypes2.default.element,
-    unCheckedImage: _propTypes2.default.element,
-    onClick: _propTypes2.default.func.isRequired,
-    isChecked: _propTypes2.default.bool.isRequired,
-    isIndeterminate: _propTypes2.default.bool.isRequired,
-    checkBoxColor: _propTypes2.default.string,
-    disabled: _propTypes2.default.bool
-}), _class.defaultProps = {
-    isChecked: false,
-    isIndeterminate: false,
-    leftTextStyle: {},
-    rightTextStyle: {}
-}, _temp));
-
-exports.default = CheckBox;
-
-var styles = _reactNative.StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        alignItems: 'center'
-    },
-    leftText: {
-        flex: 1
-    },
-    rightText: {
-        flex: 1,
-        marginLeft: 10
-    }
-});
-}, 557, null, "react-native-check-box/index.js");
-__d(/* react-native-check-box/img/ic_indeterminate_check_box.png */function(global, require, module, exports) {module.exports=require(323                                         ).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/node_modules/react-native-check-box/img","width":24,"height":24,"scales":[1],"hash":"910df1b864a696e32bda56876ddf61cd","name":"ic_indeterminate_check_box","type":"png"}); // 323 = react-native/Libraries/Image/AssetRegistry
-}, 558, null, "react-native-check-box/img/ic_indeterminate_check_box.png");
-__d(/* react-native-check-box/img/ic_check_box.png */function(global, require, module, exports) {module.exports=require(323                                         ).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/node_modules/react-native-check-box/img","width":24,"height":24,"scales":[1,2,3],"hash":"5d3b135d5214e780d63b968d2ade7240","name":"ic_check_box","type":"png"}); // 323 = react-native/Libraries/Image/AssetRegistry
-}, 559, null, "react-native-check-box/img/ic_check_box.png");
-__d(/* react-native-check-box/img/ic_check_box_outline_blank.png */function(global, require, module, exports) {module.exports=require(323                                         ).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/node_modules/react-native-check-box/img","width":24,"height":24,"scales":[1,2,3],"hash":"a254967b747795d2bc7217850e45291a","name":"ic_check_box_outline_blank","type":"png"}); // 323 = react-native/Libraries/Image/AssetRegistry
-}, 560, null, "react-native-check-box/img/ic_check_box_outline_blank.png");
 __d(/* react-native-loading-spinner-overlay/src/index.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -68200,9 +67953,9 @@ var Spinner = _wrapComponent('Spinner')((_temp = _class = function (_React$Compo
 }, _temp));
 
 exports.default = Spinner;
-}, 561, null, "react-native-loading-spinner-overlay/src/index.js");
+}, 557, null, "react-native-loading-spinner-overlay/src/index.js");
 __d(/* YUShuttles/Components/Login/Resources/yuLogo.png */function(global, require, module, exports) {module.exports=require(323                                         ).registerAsset({"__packager_asset":true,"httpServerLocation":"/assets/Components/Login/Resources","width":1200,"height":1200,"scales":[1],"hash":"1f39a41a822cee84577c60982b8b1b2b","name":"yuLogo","type":"png"}); // 323 = react-native/Libraries/Image/AssetRegistry
-}, 562, null, "YUShuttles/Components/Login/Resources/yuLogo.png");
+}, 558, null, "YUShuttles/Components/Login/Resources/yuLogo.png");
 __d(/* YUShuttles/Components/Shuttle/ChooseDirection.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -68223,7 +67976,7 @@ var _class,
 
 var _reactNative = require(12            ); // 12 = react-native
 
-var _reactNativeLoadingSpinnerOverlay = require(561                                   ); // 561 = react-native-loading-spinner-overlay
+var _reactNativeLoadingSpinnerOverlay = require(557                                   ); // 557 = react-native-loading-spinner-overlay
 
 var _reactNativeLoadingSpinnerOverlay2 = _interopRequireDefault(_reactNativeLoadingSpinnerOverlay);
 
@@ -68337,6 +68090,38 @@ var ChooseDirection = _wrapComponent('ChooseDirection')((_temp = _class = functi
             }, null, this, [[2, 8]]);
         }
     }, {
+        key: 'wipeLogin',
+        value: function wipeLogin() {
+            return regeneratorRuntime.async(function wipeLogin$(_context2) {
+                while (1) {
+                    switch (_context2.prev = _context2.next) {
+                        case 0:
+                            _context2.prev = 0;
+                            _context2.next = 3;
+                            return regeneratorRuntime.awrap(AsyncStorage.setItem('username', null));
+
+                        case 3:
+                            _context2.next = 5;
+                            return regeneratorRuntime.awrap(AsyncStorage.setItem('password', null));
+
+                        case 5:
+                            _context2.next = 10;
+                            break;
+
+                        case 7:
+                            _context2.prev = 7;
+                            _context2.t0 = _context2['catch'](0);
+
+                            console.log("ERROR");
+
+                        case 10:
+                        case 'end':
+                            return _context2.stop();
+                    }
+                }
+            }, null, this, [[0, 7]]);
+        }
+    }, {
         key: 'render',
         value: function render() {
             var _this3 = this;
@@ -68345,14 +68130,14 @@ var ChooseDirection = _wrapComponent('ChooseDirection')((_temp = _class = functi
                 _reactNative.View,
                 { style: styles.container, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 69
+                        lineNumber: 80
                     }
                 },
                 _react3.default.createElement(
                     _reactNative.Text,
                     { style: styles.instructions, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 70
+                            lineNumber: 81
                         }
                     },
                     'Where do you want to go?'
@@ -68360,7 +68145,7 @@ var ChooseDirection = _wrapComponent('ChooseDirection')((_temp = _class = functi
                 _react3.default.createElement(_reactNativeLoadingSpinnerOverlay2.default, { visible: this.state.visible, textContent: "Loading",
                     textStyle: { color: '#FFFF' }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 73
+                        lineNumber: 84
                     }
                 }),
                 _react3.default.createElement(
@@ -68371,14 +68156,14 @@ var ChooseDirection = _wrapComponent('ChooseDirection')((_temp = _class = functi
                             return _this3.chooseDirection("wilf");
                         }, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 75
+                            lineNumber: 86
                         }
                     },
                     _react3.default.createElement(
                         _reactNative.Text,
                         { style: styles.directionButtonText, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 78
+                                lineNumber: 89
                             }
                         },
                         ' Wilf '
@@ -68392,14 +68177,14 @@ var ChooseDirection = _wrapComponent('ChooseDirection')((_temp = _class = functi
                             return _this3.chooseDirection("beren");
                         }, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 80
+                            lineNumber: 91
                         }
                     },
                     _react3.default.createElement(
                         _reactNative.Text,
                         { style: styles.directionButtonText, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 83
+                                lineNumber: 94
                             }
                         },
                         ' Beren '
@@ -68455,7 +68240,7 @@ var styles = _reactNative.StyleSheet.create({
     }
 
 });
-}, 563, null, "YUShuttles/Components/Shuttle/ChooseDirection.js");
+}, 559, null, "YUShuttles/Components/Shuttle/ChooseDirection.js");
 __d(/* YUShuttles/Components/Profile/PickSide.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -68625,7 +68410,7 @@ var styles = _reactNative.StyleSheet.create({
     }
 
 });
-}, 564, null, "YUShuttles/Components/Profile/PickSide.js");
+}, 560, null, "YUShuttles/Components/Profile/PickSide.js");
 __d(/* YUShuttles/Components/Shuttle/PickATime.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -68880,7 +68665,7 @@ var styles = _reactNative.StyleSheet.create({
     }
 
 });
-}, 565, null, "YUShuttles/Components/Shuttle/PickATime.js");
+}, 561, null, "YUShuttles/Components/Shuttle/PickATime.js");
 ;require(54);
 ;require(0);
 //# sourceMappingURL=index.map

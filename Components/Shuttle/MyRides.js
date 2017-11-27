@@ -11,7 +11,8 @@ import {
     ScrollView,
     TouchableOpacity,
     TextInput,
-    Navigator
+    Navigator,
+    AsyncStorage,
 } from 'react-native';
 import Login from '../Login/Login'
 

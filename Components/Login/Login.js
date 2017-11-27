@@ -7,6 +7,8 @@ import {
     TouchableOpacity,
     TextInput,
     KeyboardAvoidingView,
+    AsyncStorage,
+
 } from 'react-native';
 
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -24,6 +26,44 @@ export default class Login extends Component<{}> {
     static navigationOptions = {
         title: 'Login',
     };
+
+    componentDidMount() {
+            this.getUsernameAndPassword()
+    }
+
+
+
+    async getUsernameAndPassword(){
+        try{
+            const email = await AsyncStorage.getItem('username');
+            const password = await AsyncStorage.getItem('password');
+
+            if(email != null && password != null){
+                this.setState({
+                    email: email,
+                    password: password
+                });
+                this.props.navigation.navigate('Profile', {
+                    email: this.state.email,
+                    password: this.state.password,
+                });
+            }
+        }
+        catch(error){
+        }
+    }
+
+    async storeUsernameAndPassword(){
+        try{
+            await AsyncStorage.setItem('username', this.state.email);
+            await AsyncStorage.setItem('password', this.state.password);
+        }
+        catch(error){
+            console.log("ERROR");
+        }
+    }
+
+
 
     async login(email, password) {
         if (email === null || password === null) {
@@ -46,6 +86,7 @@ export default class Login extends Component<{}> {
                     const responseData = await response.json();
                     if (responseData['login'] === true) {
                         this.setState({visible: false});
+                        this.storeUsernameAndPassword()
                         this.props.navigation.navigate('Profile', {
                             email: this.state.email,
                             password: this.state.password,
@@ -72,7 +113,6 @@ export default class Login extends Component<{}> {
 
     render() {
         return (
-
             <KeyboardAvoidingView
                 style={styles.container}
                 behavior="padding"
