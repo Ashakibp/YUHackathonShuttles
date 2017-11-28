@@ -68066,7 +68066,7 @@ var ChooseDirection = _wrapComponent('ChooseDirection')((_temp = _class = functi
 
                         case 5:
                             response = _context.sent;
-                            _context.next = 13;
+                            _context.next = 14;
                             break;
 
                         case 8:
@@ -68075,14 +68075,15 @@ var ChooseDirection = _wrapComponent('ChooseDirection')((_temp = _class = functi
 
                             this.toggleState();
                             alert("Something went wrong - please check your login");
+                            this.wipeLogin();
                             return _context.abrupt('return', _react3.default.createElement(Login, {
                                 __source: {
                                     fileName: _jsxFileName,
-                                    lineNumber: 58
+                                    lineNumber: 60
                                 }
                             }));
 
-                        case 13:
+                        case 14:
                         case 'end':
                             return _context.stop();
                     }
@@ -68098,11 +68099,11 @@ var ChooseDirection = _wrapComponent('ChooseDirection')((_temp = _class = functi
                         case 0:
                             _context2.prev = 0;
                             _context2.next = 3;
-                            return regeneratorRuntime.awrap(AsyncStorage.setItem('username', null));
+                            return regeneratorRuntime.awrap(_reactNative.AsyncStorage.setItem('username', null));
 
                         case 3:
                             _context2.next = 5;
-                            return regeneratorRuntime.awrap(AsyncStorage.setItem('password', null));
+                            return regeneratorRuntime.awrap(_reactNative.AsyncStorage.setItem('password', null));
 
                         case 5:
                             _context2.next = 10;
@@ -68130,14 +68131,14 @@ var ChooseDirection = _wrapComponent('ChooseDirection')((_temp = _class = functi
                 _reactNative.View,
                 { style: styles.container, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 80
+                        lineNumber: 82
                     }
                 },
                 _react3.default.createElement(
                     _reactNative.Text,
                     { style: styles.instructions, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 81
+                            lineNumber: 83
                         }
                     },
                     'Where do you want to go?'
@@ -68145,7 +68146,7 @@ var ChooseDirection = _wrapComponent('ChooseDirection')((_temp = _class = functi
                 _react3.default.createElement(_reactNativeLoadingSpinnerOverlay2.default, { visible: this.state.visible, textContent: "Loading",
                     textStyle: { color: '#FFFF' }, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 84
+                        lineNumber: 86
                     }
                 }),
                 _react3.default.createElement(
@@ -68156,14 +68157,14 @@ var ChooseDirection = _wrapComponent('ChooseDirection')((_temp = _class = functi
                             return _this3.chooseDirection("wilf");
                         }, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 86
+                            lineNumber: 88
                         }
                     },
                     _react3.default.createElement(
                         _reactNative.Text,
                         { style: styles.directionButtonText, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 89
+                                lineNumber: 91
                             }
                         },
                         ' Wilf '
@@ -68177,14 +68178,14 @@ var ChooseDirection = _wrapComponent('ChooseDirection')((_temp = _class = functi
                             return _this3.chooseDirection("beren");
                         }, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 91
+                            lineNumber: 93
                         }
                     },
                     _react3.default.createElement(
                         _reactNative.Text,
                         { style: styles.directionButtonText, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 94
+                                lineNumber: 96
                             }
                         },
                         ' Beren '
@@ -68555,7 +68556,7 @@ var ChooseDirection = _wrapComponent('ChooseDirection')((_temp = _class = functi
                             return _context2.abrupt('return', _react3.default.createElement(_Login2.default, {
                                 __source: {
                                     fileName: _jsxFileName,
-                                    lineNumber: 73
+                                    lineNumber: 74
                                 }
                             }));
 
@@ -68582,7 +68583,7 @@ var ChooseDirection = _wrapComponent('ChooseDirection')((_temp = _class = functi
                             return _this3.bookTime(buttonList[i]);
                         }, __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 85
+                            lineNumber: 86
                         }
                     },
                     _react3.default.createElement(
@@ -68590,7 +68591,7 @@ var ChooseDirection = _wrapComponent('ChooseDirection')((_temp = _class = functi
                         {
                             style: styles.directionButtonText, __source: {
                                 fileName: _jsxFileName,
-                                lineNumber: 85
+                                lineNumber: 86
                             }
                         },
                         buttonList[i]
@@ -68605,7 +68606,7 @@ var ChooseDirection = _wrapComponent('ChooseDirection')((_temp = _class = functi
                 _reactNative.View,
                 { style: styles.container, __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 90
+                        lineNumber: 91
                     }
                 },
                 _react3.default.createElement(
@@ -68613,7 +68614,7 @@ var ChooseDirection = _wrapComponent('ChooseDirection')((_temp = _class = functi
                     {
                         __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 91
+                            lineNumber: 92
                         }
                     },
                     buttonsListArr
