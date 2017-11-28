@@ -10,6 +10,7 @@ import {
     AsyncStorage,
 } from 'react-native';
 import Login from '../Login/Login'
+import Spinner from 'react-native-loading-spinner-overlay';
 
 export default class ChooseDirection extends Component<{}> {
     constructor(props) {
@@ -42,7 +43,8 @@ export default class ChooseDirection extends Component<{}> {
 
     async setTime(time) {
         try {
-            let response = await fetch("http://18.221.232.220:8080/bookride/", {
+            this.setState({visible: true});
+            let response = await fetch("http://18.217.21.25:8080/bookride/", {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -57,13 +59,17 @@ export default class ChooseDirection extends Component<{}> {
             });
                     const responseData = await response.json();
                     if (responseData['worked'] === true) {
-                        alert("Shuttle has been booked!");
+                        this.setState({visible: false});
+                        setTimeout(() => {
+                            alert("Shuttle has been booked!");
+                        }, 1);
                         this.props.navigation.navigate('Profile', {
                             email: this.state.email,
                             password: this.state.password
                         });
                     }
                     else {
+                        this.setState({visible: false});
                         setTimeout(() => {
                             alert("Something went wrong");
                         }, 1);
@@ -81,6 +87,7 @@ export default class ChooseDirection extends Component<{}> {
         buttonsListArr = [];
         console.log(buttonList);
 
+
         for (let i = 0; i < buttonList.length; i++) {
             buttonsListArr.push(
                 <TouchableOpacity style={styles.directionButton} onPress={() => this.bookTime(buttonList[i])}><Text
@@ -88,7 +95,10 @@ export default class ChooseDirection extends Component<{}> {
             );
         }
         return (
+
             <View style={styles.container}>
+                <Spinner visible={this.state.visible} textContent={"Booking the ride"}
+                         textStyle={{color: '#FFFF'}}/>
                 <ScrollView>
                     {buttonsListArr}
                 </ScrollView>

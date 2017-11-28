@@ -16,12 +16,14 @@ import {
 } from 'react-native';
 import Login from '../Login/Login'
 
+
 export default class ChooseDirection extends Component<{}> {
     constructor(props) {
         super(props);
         this.state = {
             email: this.props.navigation.state.params.email,
             password: this.props.navigation.state.params.password,
+            visible: false,
         }
     }
 
@@ -45,12 +47,19 @@ export default class ChooseDirection extends Component<{}> {
 
     async setTime(time) {
         try {
-            let response = await fetch("http://127.0.0.1:8080/bookride/" + this.state.email + "/" + this.state.password + "/" + this.state.direction + "/" + time, {
-                method: 'get',
+
+            let response = await fetch("http://18.217.21.25:8080/bookride/", {
+                method: 'POST',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
-                }
+                },
+                body: JSON.stringify({
+                    username: this.state.email,
+                    password: this.state.password,
+                    direction: this.state.direction,
+                    time: time
+                })
             }).then((response) => response.json())
                 .then((responseData) => {
                     if (responseData['worked'] == true) {
@@ -64,7 +73,6 @@ export default class ChooseDirection extends Component<{}> {
         }
         catch (error) {
             alert("Something went wrong :(");
-            return (<Login/>);
 
         }
     }

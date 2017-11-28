@@ -25,6 +25,7 @@ export default class Login extends Component<{}> {
 
     static navigationOptions = {
         title: 'Login',
+        headerLeft: null
     };
 
     componentDidMount() {
@@ -72,7 +73,7 @@ export default class Login extends Component<{}> {
         else {
             try {
                 this.setState({visible: true});
-                let response = await fetch("http://18.221.232.220:8080/login/",{
+                let response = await fetch("http://18.217.21.25:8080/login/",{
                         method: 'POST',
                         headers: {
                             'Accept': 'application/json',
@@ -86,7 +87,7 @@ export default class Login extends Component<{}> {
                     const responseData = await response.json();
                     if (responseData['login'] === true) {
                         this.setState({visible: false});
-                        this.storeUsernameAndPassword()
+                        this.storeUsernameAndPassword();
                         this.props.navigation.navigate('Profile', {
                             email: this.state.email,
                             password: this.state.password,
